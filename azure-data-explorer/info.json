@@ -1,0 +1,540 @@
+{
+  "name": "azure-data-explorer",
+  "label": "Azure Data Explorer",
+  "version": "1.0.0",
+  "description": "Azure Data Explorer is a fully managed, high-performance big data analytics platform that makes it easy to analyze large volumes of data streamed from applications, websites, IoT devices, and more, in real-time. This connector connects to Azure Data Explorer (Kusto) clusters using the Azure Data Explorer REST APIs and Kusto Query Language (KQL). It allows you to list databases and tables, explore table schemas and data, run custom KQL queries and management (control) commands, and write data back to the database by ingesting records inline, as well as delete records or tables from the database. This connector is useful for security investigations and enrichment of data, for example, viewing security logs and updating metrics back to the database.",
+  "publisher": "Fortinet",
+  "cs_approved": true,
+  "cs_compatible": true,
+  "category": "Database",
+  "icon_small_name": "small.png",
+  "icon_large_name": "large.png",
+  "help_online": "",
+  "ingestion_supported": false,
+  "configuration": {
+    "fields": [
+      {
+        "title": "Get Access Token",
+        "required": true,
+        "editable": true,
+        "visible": true,
+        "type": "select",
+        "options": [
+          "Without a User - Application Permission",
+          "On behalf of User - Delegate Permission"
+        ],
+        "name": "auth_type",
+        "value": "On behalf of User - Delegate Permission",
+        "description": "Select the authentication method to use to obtain tokens for accessing the Azure Data Explorer (Kusto) APIs. You can choose one of the following methods: - Without a User - Application Permission, or On Behalf of a User - Delegated Permission.",
+        "tooltip": "Select the authentication method to use to obtain tokens for accessing the Azure Data Explorer (Kusto) APIs. You can choose one of the following methods:\n- Without a User - Application Permission: To access the application APIs without a signed-in user.\n or - On Behalf of a User - Delegated Permission: To access the application APIs on behalf of a signed-in user.",
+        "onchange": {
+          "Without a User - Application Permission": [
+            {
+              "title": "Cluster URL",
+              "name": "resource",
+              "type": "text",
+              "description": "Enter the URL of the Azure Data Explorer (Kusto) cluster used to access the APIs.",
+              "tooltip": "Enter the URL of the Azure Data Explorer (Kusto) cluster used to access the APIs. You can find this in the Azure portal on the Overview page of your cluster. Only HTTPS URLs are supported.",
+              "placeholder": "E.g. https://mycluster.westus.kusto.windows.net",
+              "required": true,
+              "editable": true,
+              "visible": true
+            },
+            {
+              "title": "Tenant ID",
+              "name": "tenant_id",
+              "type": "text",
+              "description": "Enter the Microsoft Entra tenant ID for your organization.",
+              "tooltip": "Enter the Microsoft Entra tenant ID for your organization.",
+              "required": true,
+              "editable": true,
+              "visible": true
+            },
+            {
+              "title": "Client ID",
+              "name": "client_id",
+              "type": "text",
+              "description": "Enter the unique ID of the Microsoft Entra application registered for API access. This ID is used to create an authentication token required to access the API.",
+              "tooltip": "Enter the unique ID of the Microsoft Entra application registered for API access. This ID is used to create an authentication token required to access the API.",
+              "required": true,
+              "editable": true,
+              "visible": true
+            },
+            {
+              "title": "Client Secret",
+              "name": "client_secret",
+              "type": "password",
+              "description": "Enter the client secret associated with the Microsoft Entra application. This secret is used to create an authentication token required to access the API. For information about creating a secret key, see the Register an app to access the Azure Data Explorer APIs without a user article.",
+              "tooltip": "Enter the client secret associated with the Microsoft Entra application. This secret is used to create an authentication token required to access the API.",
+              "required": true,
+              "editable": true,
+              "visible": true
+            }
+          ],
+          "On behalf of User - Delegate Permission": [
+            {
+              "title": "Cluster URL",
+              "name": "resource",
+              "type": "text",
+              "description": "Enter the URL of the Azure Data Explorer (Kusto) cluster used to access the APIs.",
+              "tooltip": "Enter the URL of the Azure Data Explorer (Kusto) cluster used to access the APIs. You can find this in the Azure portal on the Overview page of your cluster. Only HTTPS URLs are supported.",
+              "placeholder": "E.g. https://mycluster.westus.kusto.windows.net",
+              "required": true,
+              "editable": true,
+              "visible": true
+            },
+            {
+              "title": "Tenant ID",
+              "name": "tenant_id",
+              "type": "text",
+              "description": "Enter the Microsoft Entra tenant ID for your organization.",
+              "tooltip": "Enter the Microsoft Entra tenant ID for your organization.",
+              "required": true,
+              "editable": true,
+              "visible": true
+            },
+            {
+              "title": "Client ID",
+              "name": "client_id",
+              "type": "text",
+              "description": "Enter the unique ID of the Microsoft Entra application registered for API access. This ID is used to create an authentication token required to access the API.",
+              "tooltip": "Enter the unique ID of the Microsoft Entra application registered for API access. This ID is used to create an authentication token required to access the API.",
+              "required": true,
+              "editable": true,
+              "visible": true
+            },
+            {
+              "title": "Client Secret",
+              "name": "client_secret",
+              "type": "password",
+              "description": "Enter the client secret associated with the Microsoft Entra application. This secret is used to create an authentication token required to access the API. For information about creating a secret key, see the Register an app to access the Azure Data Explorer APIs article.",
+              "tooltip": "Enter the client secret associated with the Microsoft Entra application. This secret is used to create an authentication token required to access the API.",
+              "required": true,
+              "editable": true,
+              "visible": true
+            },
+            {
+              "title": "Authorization Code",
+              "name": "code",
+              "type": "password",
+              "tooltip": "Enter the authorization code obtained during the authorization process.",
+              "description": "Enter the authorization code obtained during the authorization process. For more information, see the Getting Authorization Code section.",
+              "required": true,
+              "editable": true,
+              "visible": true
+            },
+            {
+              "title": "Redirect URI",
+              "name": "redirect_uri",
+              "type": "text",
+              "tooltip": "Enter the redirect URI configured for your application. The URI must exactly match one of the redirect URIs registered for the application in the Microsoft Entra admin center.",
+              "description": "Enter the redirect URI configured for your application. The URI must exactly match one of the redirect URIs registered for the application in the Microsoft Entra admin center.",
+              "placeholder": "E.g. https://localhost/myapp",
+              "required": true,
+              "editable": true,
+              "visible": true
+            }
+          ]
+        }
+      },
+      {
+        "title": "Verify SSL",
+        "required": false,
+        "editable": true,
+        "visible": true,
+        "type": "checkbox",
+        "name": "verify_ssl",
+        "value": true,
+        "description": "Specifies whether the SSL certificate for the server is to be verified. By default, this option is set as True.",
+        "tooltip": "Specifies whether the SSL certificate for the server is to be verified. By default, this option is set as True."
+      }
+    ]
+  },
+  "operations": [
+    {
+      "title": "Run Query",
+      "description": "Runs a Kusto Query Language (KQL) query on the specified database on the Azure Data Explorer cluster and retrieves the results. For example, you can use this operation to view security logs for investigations and enrichment. If the specified query is a control command (starts with a dot '.'), such as .show tables, then it is automatically executed on the management endpoint.",
+      "operation": "run_query",
+      "annotation": "run_query",
+      "category": "investigation",
+      "parameters": [
+        {
+          "title": "Query",
+          "description": "Specify the Kusto Query Language (KQL) query to run on the database. For example, MyTable | where Severity == 'High' | take 10",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "textarea",
+          "name": "query",
+          "tooltip": "Specify the KQL query to run on the database.",
+          "placeholder": "E.g. SecurityLogs | where Severity == 'High' | take 10"
+        },
+        {
+          "title": "Database",
+          "description": "Specify the name of the database on which you want to run this operation.",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "database",
+          "tooltip": "Name of the database on which you want to run this operation."
+        },
+        {
+          "title": "Query Timeout",
+          "description": "(Optional) Specify the maximum time to wait for the query to complete, in the HH:MM:SS format. By default, this is set to 00:03:00, i.e., 3 minutes.",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "query_timeout",
+          "tooltip": "(Optional) Maximum time to wait for the query to complete, in the HH:MM:SS format. By default, this is set to 00:03:00.",
+          "placeholder": "E.g. 00:03:00"
+        }
+      ],
+      "output_schema": {},
+      "enabled": true
+    },
+    {
+      "title": "Get Database List",
+      "description": "Retrieves a list of all databases that are available on the Azure Data Explorer cluster based on the specified search criteria.",
+      "operation": "get_database_list",
+      "annotation": "get_database_list",
+      "category": "investigation",
+      "parameters": [],
+      "output_schema": {
+        "data": [
+          {
+            "Version": "",
+            "IsCurrent": "",
+            "DatabaseId": "",
+            "PrettyName": "",
+            "DatabaseName": "",
+            "ReservedSlot1": "",
+            "InTransitionTo": "",
+            "SuspensionState": "",
+            "PersistentStorage": "",
+            "DatabaseAccessMode": ""
+          }
+        ]
+      },
+      "enabled": true
+    },
+    {
+      "title": "Get Table List",
+      "description": "Retrieves a list of all tables in the specified database on the Azure Data Explorer cluster based on the specified search criteria.",
+      "operation": "get_table_list",
+      "annotation": "get_table_list",
+      "category": "investigation",
+      "parameters": [
+        {
+          "title": "Database",
+          "description": "Specify the name of the database on which you want to run this operation.",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "database",
+          "tooltip": "Name of the database on which you want to run this operation."
+        }
+      ],
+      "output_schema": {
+        "data": [
+          {
+            "Folder": "",
+            "DocString": "",
+            "TableName": "",
+            "DatabaseName": ""
+          }
+        ]
+      },
+      "enabled": true
+    },
+    {
+      "title": "Get Table Details",
+      "description": "Retrieves details, such as column names and data types, of a specific table in the specified database on the Azure Data Explorer cluster.",
+      "operation": "get_table_details",
+      "annotation": "get_table_details",
+      "category": "investigation",
+      "parameters": [
+        {
+          "title": "Table Name",
+          "description": "Specify the name of the table whose details you want to retrieve from the database.",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "table",
+          "tooltip": "Name of the table whose details you want to retrieve from the database."
+        },
+        {
+          "title": "Database",
+          "description": "Specify the name of the database on which you want to run this operation.",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "database",
+          "tooltip": "Name of the database on which you want to run this operation."
+        }
+      ],
+      "output_schema": {
+        "data": [
+          {
+            "Folder": "",
+            "Schema": "",
+            "DocString": "",
+            "TableName": "",
+            "DatabaseName": ""
+          }
+        ]
+      },
+      "enabled": true
+    },
+    {
+      "title": "Get Table Data",
+      "description": "Retrieves rows from a specified table in the database based on the specified time range, filter query, sort order, and the maximum number of records to retrieve. You can use this operation to view security logs for investigations and enrichment.",
+      "operation": "get_table_data",
+      "annotation": "get_table_data",
+      "category": "investigation",
+      "parameters": [
+        {
+          "title": "Table Name",
+          "description": "Specify the name of the table from which you want to retrieve the data.",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "table",
+          "tooltip": "Name of the table from which you want to retrieve the data."
+        },
+        {
+          "title": "Database",
+          "description": "Specify the name of the database on which you want to run this operation.",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "database",
+          "tooltip": "Name of the database on which you want to run this operation."
+        },
+        {
+          "title": "Time Column",
+          "description": "(Optional) Specify the name of the datetime column in the table based on which you want to filter the data, such as a Timestamp column. If specified, then also specify the Time From and Time To parameters.",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "time_column",
+          "tooltip": "(Optional) Name of the datetime column based on which you want to filter the data. If specified, then also specify the Time From and Time To parameters."
+        },
+        {
+          "title": "Time From",
+          "description": "(Optional) Specify the start datetime in the YYYY-MM-DD HH:MM:SS format from which to retrieve the data. This parameter is used only if the Time Column parameter is specified.",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "time_from",
+          "tooltip": "(Optional) Start datetime in the YYYY-MM-DD HH:MM:SS format from which to retrieve the data. This parameter is used only if the Time Column parameter is specified.",
+          "placeholder": "E.g. 2024-01-01 00:00:00"
+        },
+        {
+          "title": "Time To",
+          "description": "(Optional) Specify the end datetime in the YYYY-MM-DD HH:MM:SS format until which to retrieve the data. This parameter is used only if the Time Column parameter is specified.",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "time_to",
+          "tooltip": "(Optional) End datetime in the YYYY-MM-DD HH:MM:SS format until which to retrieve the data. This parameter is used only if the Time Column parameter is specified.",
+          "placeholder": "E.g. 2024-12-31 23:59:59"
+        },
+        {
+          "title": "Filter",
+          "description": "(Optional) Specify the KQL filter query to apply to the data retrieved from the table, without the pipe symbol. For example, where Severity == 'High'",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "filter",
+          "tooltip": "(Optional) KQL filter query to apply to the data retrieved from the table, without the pipe symbol. For example, where Severity == 'High'",
+          "placeholder": "E.g. where Severity == 'High'"
+        },
+        {
+          "title": "Order By",
+          "description": "(Optional) Specify the column and sort order, asc or desc, based on which you want to sort the data retrieved from the table. For example, Timestamp desc",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "order_by",
+          "tooltip": "(Optional) Column and sort order, asc or desc, based on which you want to sort the data retrieved from the table.",
+          "placeholder": "E.g. Timestamp desc"
+        },
+        {
+          "title": "Limit",
+          "description": "(Optional) Specify the maximum number of records that this operation should retrieve from the table. If not specified, all records matching the filter criteria are retrieved.",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "integer",
+          "name": "limit",
+          "tooltip": "(Optional) Maximum number of records that this operation should retrieve from the table. If not specified, all records matching the filter criteria are retrieved."
+        },
+        {
+          "title": "Query Timeout",
+          "description": "(Optional) Specify the maximum time to wait for the query to complete, in the HH:MM:SS format. By default, this is set to 00:03:00, i.e., 3 minutes.",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "query_timeout",
+          "tooltip": "(Optional) Maximum time to wait for the query to complete, in the HH:MM:SS format. By default, this is set to 00:03:00.",
+          "placeholder": "E.g. 00:03:00"
+        }
+      ],
+      "output_schema": {
+        "data": []
+      },
+      "enabled": true
+    },
+    {
+      "title": "Ingest Inline Data",
+      "description": "Writes (ingests) records into a specified table in the database using the .ingest inline control command. Specify the data to ingest in the CSV format. You can use this operation to update data or metrics back to the database.",
+      "operation": "ingest_inline_data",
+      "annotation": "ingest_inline_data",
+      "category": "containment",
+      "parameters": [
+        {
+          "title": "Table Name",
+          "description": "Specify the name of the table into which you want to ingest the data. The table must already exist in the database.",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "table",
+          "tooltip": "Name of the table into which you want to ingest the data. The table must already exist in the database."
+        },
+        {
+          "title": "CSV Data",
+          "description": "Specify the data, in the CSV format, to ingest into the table. Each line is one record with comma-separated values. The values must match the order of the columns in the table and must be compatible with the column data types. Do not include a header row; column names are not read by this command. Use a new line for each new record.",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "textarea",
+          "name": "csv_data",
+          "tooltip": "Data, in the CSV format, to ingest into the table. Each line is one record. The values must match the order of the columns in the table. Do not include a header row.",
+          "placeholder": "E.g. For a table with columns (Timestamp, Severity, Message):\n2024-01-01 00:00:00,High,Login failed\n2024-01-01 00:05:00,Low,Login successful"
+        },
+        {
+          "title": "Database",
+          "description": "Specify the name of the database on which you want to run this operation.",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "database",
+          "tooltip": "Name of the database on which you want to run this operation."
+        }
+      ],
+      "output_schema": {
+        "data": [
+          {
+            "Duration": "",
+            "ExtentId": "",
+            "HasErrors": "",
+            "ItemLoaded": "",
+            "OperationId": ""
+          }
+        ],
+        "message": ""
+      },
+      "enabled": true
+    },
+    {
+      "title": "Delete Table Data",
+      "description": "Deletes records from a specified table in the database that match the specified filter conditions using the .delete table records control command. This is a soft delete: the matching records are immediately hidden from queries and are physically removed when the affected extents are rebuilt during background compaction. Requires Table Admin permission on the database.",
+      "operation": "delete_table_data",
+      "annotation": "delete_table_data",
+      "category": "containment",
+      "parameters": [
+        {
+          "title": "Table Name",
+          "description": "Specify the name of the table from which you want to delete the data.",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "table",
+          "tooltip": "Name of the table from which you want to delete the data."
+        },
+        {
+          "title": "Predicate",
+          "description": "Specify the filter conditions, starting with the where clause, for the records to delete from the table. For example, where Severity == 'Low'. If the column name contains spaces or special characters, enclose it in square brackets, e.g. where ['Connector Name'] == 'Azure Data Explorer'. The specified conditions are applied on the table specified in the Table Name field.",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "predicate",
+          "tooltip": "Filter conditions, starting with the where clause, for the records to delete from the table. For example, where Severity == 'Low'. Enclose column names containing spaces in square brackets.",
+          "placeholder": "E.g. where Severity == 'Low' or where ['Column Name'] == 'value'"
+        },
+        {
+          "title": "Database",
+          "description": "Specify the name of the database on which you want to run this operation.",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "database",
+          "tooltip": "Name of the database on which you want to run this operation."
+        }
+      ],
+      "output_schema": {
+        "data": [
+          {
+            "NewExtentId": "",
+            "OldExtentId": "",
+            "RecordsMatchPredicate": ""
+          }
+        ],
+        "message": ""
+      },
+      "enabled": true
+    },
+    {
+      "title": "Delete Table",
+      "description": "Deletes a specified table, along with its data, from the database using the .drop table control command.",
+      "operation": "delete_table",
+      "annotation": "delete_table",
+      "category": "containment",
+      "parameters": [
+        {
+          "title": "Table Name",
+          "description": "Specify the name of the table that you want to delete from the database.",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "table",
+          "tooltip": "Name of the table that you want to delete from the database."
+        },
+        {
+          "title": "Database",
+          "description": "Specify the name of the database on which you want to run this operation.",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "database",
+          "tooltip": "Name of the database on which you want to run this operation."
+        }
+      ],
+      "output_schema": {
+        "data": [],
+        "message": ""
+      },
+      "enabled": true
+    }
+  ]
+}

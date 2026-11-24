@@ -1,0 +1,592 @@
+{
+  "type": "workflow_collections",
+  "data": [
+    {
+      "uuid": "a3da64a2-7d22-4dab-8f72-6c86913f2bbf",
+      "@type": "WorkflowCollection",
+      "workflows": [
+        {
+          "@type": "Workflow",
+          "uuid": "96d531aa-bb46-45cc-9390-bfff9bd29b6b",
+          "collection": "/api/3/workflow_collections/a3da64a2-7d22-4dab-8f72-6c86913f2bbf",
+          "steps": [
+            {
+              "uuid": "ff93a708-c61c-44a3-b285-2f22175c7b16",
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "step_variables": {
+                  "input": {
+                    "params": []
+                  }
+                }
+              },
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62"
+            },
+            {
+              "uuid": "c1f2795d-9cb9-4915-b4b6-137a94e8979d",
+              "@type": "WorkflowStep",
+              "name": "Run Query",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "name": "Azure Data Explorer",
+                "config": "",
+                "params": {
+                  "query": "",
+                  "database": "",
+                  "query_timeout": ""
+                },
+                "version": "1.0.0",
+                "connector": "azure-data-explorer",
+                "operation": "run_query",
+                "operationTitle": "Run Query"
+              },
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671"
+            }
+          ],
+          "triggerLimit": null,
+          "description": "Runs a Kusto Query Language (KQL) query on the specified database on the Azure Data Explorer cluster and retrieves the results. For example, you can use this operation to view security logs for investigations and enrichment. If the specified query is a control command (starts with a dot '.'), such as .show tables, then it is automatically executed on the management endpoint.",
+          "name": "Run Query",
+          "tag": "#Azure Data Explorer",
+          "recordTags": [
+            "Azure",
+            "azure-data-explorer"
+          ],
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/ff93a708-c61c-44a3-b285-2f22175c7b16",
+          "routes": [
+            {
+              "uuid": "1869a59d-3738-406e-ae0c-925941e5f4a4",
+              "@type": "WorkflowRoute",
+              "label": null,
+              "isExecuted": false,
+              "name": "Start-> Run Query",
+              "sourceStep": "/api/3/workflow_steps/ff93a708-c61c-44a3-b285-2f22175c7b16",
+              "targetStep": "/api/3/workflow_steps/c1f2795d-9cb9-4915-b4b6-137a94e8979d"
+            }
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "uuid": "36df76e7-aa63-4fa1-9a56-a1dc64cc9210",
+          "collection": "/api/3/workflow_collections/a3da64a2-7d22-4dab-8f72-6c86913f2bbf",
+          "steps": [
+            {
+              "uuid": "0d036494-e9b0-4354-83be-0a3d135eed88",
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "step_variables": {
+                  "input": {
+                    "params": []
+                  }
+                }
+              },
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62"
+            },
+            {
+              "uuid": "f96ee6a2-b1f5-463f-a811-cfc847feefbd",
+              "@type": "WorkflowStep",
+              "name": "Get Database List",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "name": "Azure Data Explorer",
+                "config": "",
+                "params": [],
+                "version": "1.0.0",
+                "connector": "azure-data-explorer",
+                "operation": "get_database_list",
+                "operationTitle": "Get Database List"
+              },
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671"
+            }
+          ],
+          "triggerLimit": null,
+          "description": "Retrieves a list of all databases that are available on the Azure Data Explorer cluster based on the specified search criteria.",
+          "name": "Get Database List",
+          "tag": "#Azure Data Explorer",
+          "recordTags": [
+            "Azure",
+            "azure-data-explorer"
+          ],
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/0d036494-e9b0-4354-83be-0a3d135eed88",
+          "routes": [
+            {
+              "uuid": "911d8e64-8084-4600-80b2-d51ec0e70b37",
+              "@type": "WorkflowRoute",
+              "label": null,
+              "isExecuted": false,
+              "name": "Start-> Get Database List",
+              "sourceStep": "/api/3/workflow_steps/0d036494-e9b0-4354-83be-0a3d135eed88",
+              "targetStep": "/api/3/workflow_steps/f96ee6a2-b1f5-463f-a811-cfc847feefbd"
+            }
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "uuid": "abcd61d8-45ef-4a93-9537-f4442a14cd78",
+          "collection": "/api/3/workflow_collections/a3da64a2-7d22-4dab-8f72-6c86913f2bbf",
+          "steps": [
+            {
+              "uuid": "d245026e-b088-4faa-99d5-94eef5eb6914",
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "step_variables": {
+                  "input": {
+                    "params": []
+                  }
+                }
+              },
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62"
+            },
+            {
+              "uuid": "95c7a3be-f63d-490c-bc43-cffaa9b7065b",
+              "@type": "WorkflowStep",
+              "name": "Get Table List",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "name": "Azure Data Explorer",
+                "config": "",
+                "params": {
+                  "database": ""
+                },
+                "version": "1.0.0",
+                "connector": "azure-data-explorer",
+                "operation": "get_table_list",
+                "operationTitle": "Get Table List"
+              },
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671"
+            }
+          ],
+          "triggerLimit": null,
+          "description": "Retrieves a list of all tables in the specified database on the Azure Data Explorer cluster based on the specified search criteria.",
+          "name": "Get Table List",
+          "tag": "#Azure Data Explorer",
+          "recordTags": [
+            "Azure",
+            "azure-data-explorer"
+          ],
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/d245026e-b088-4faa-99d5-94eef5eb6914",
+          "routes": [
+            {
+              "uuid": "2d6682e5-ec43-412d-9d83-f4c6d013d419",
+              "@type": "WorkflowRoute",
+              "label": null,
+              "isExecuted": false,
+              "name": "Start-> Get Table List",
+              "sourceStep": "/api/3/workflow_steps/d245026e-b088-4faa-99d5-94eef5eb6914",
+              "targetStep": "/api/3/workflow_steps/95c7a3be-f63d-490c-bc43-cffaa9b7065b"
+            }
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "uuid": "1e9b2dfe-42e5-4562-8d11-81aa8be356db",
+          "collection": "/api/3/workflow_collections/a3da64a2-7d22-4dab-8f72-6c86913f2bbf",
+          "steps": [
+            {
+              "uuid": "a0196091-a06e-41e3-beb9-2cd946f4340f",
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "step_variables": {
+                  "input": {
+                    "params": []
+                  }
+                }
+              },
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62"
+            },
+            {
+              "uuid": "777e0c68-9c24-4cd6-bc77-57bc12c5899e",
+              "@type": "WorkflowStep",
+              "name": "Get Table Details",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "name": "Azure Data Explorer",
+                "config": "",
+                "params": {
+                  "table": "",
+                  "database": ""
+                },
+                "version": "1.0.0",
+                "connector": "azure-data-explorer",
+                "operation": "get_table_details",
+                "operationTitle": "Get Table Details"
+              },
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671"
+            }
+          ],
+          "triggerLimit": null,
+          "description": "Retrieves details, such as column names and data types, of a specific table in the specified database on the Azure Data Explorer cluster.",
+          "name": "Get Table Details",
+          "tag": "#Azure Data Explorer",
+          "recordTags": [
+            "Azure",
+            "azure-data-explorer"
+          ],
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/a0196091-a06e-41e3-beb9-2cd946f4340f",
+          "routes": [
+            {
+              "uuid": "4139553e-bdd0-4338-b6d0-cccd3e356b73",
+              "@type": "WorkflowRoute",
+              "label": null,
+              "isExecuted": false,
+              "name": "Start-> Get Table Details",
+              "sourceStep": "/api/3/workflow_steps/a0196091-a06e-41e3-beb9-2cd946f4340f",
+              "targetStep": "/api/3/workflow_steps/777e0c68-9c24-4cd6-bc77-57bc12c5899e"
+            }
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "uuid": "40174092-36c8-4e25-9204-45f8db0dde83",
+          "collection": "/api/3/workflow_collections/a3da64a2-7d22-4dab-8f72-6c86913f2bbf",
+          "steps": [
+            {
+              "uuid": "aaa74c65-f786-4da0-bae5-3369a95eb8db",
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "step_variables": {
+                  "input": {
+                    "params": []
+                  }
+                }
+              },
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62"
+            },
+            {
+              "uuid": "a79ef4e6-8bb6-4211-9b24-d77a2e1312ca",
+              "@type": "WorkflowStep",
+              "name": "Get Table Data",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "name": "Azure Data Explorer",
+                "config": "",
+                "params": {
+                  "table": "",
+                  "database": "",
+                  "time_column": "",
+                  "time_from": "",
+                  "time_to": "",
+                  "filter": "",
+                  "order_by": "",
+                  "limit": "",
+                  "query_timeout": ""
+                },
+                "version": "1.0.0",
+                "connector": "azure-data-explorer",
+                "operation": "get_table_data",
+                "operationTitle": "Get Table Data"
+              },
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671"
+            }
+          ],
+          "triggerLimit": null,
+          "description": "Retrieves rows from a specified table in the database based on the specified time range, filter query, sort order, and the maximum number of records to retrieve. You can use this operation to view security logs for investigations and enrichment.",
+          "name": "Get Table Data",
+          "tag": "#Azure Data Explorer",
+          "recordTags": [
+            "Azure",
+            "azure-data-explorer"
+          ],
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/aaa74c65-f786-4da0-bae5-3369a95eb8db",
+          "routes": [
+            {
+              "uuid": "e0559ec2-3e50-41ff-b5d0-60d2a373c23d",
+              "@type": "WorkflowRoute",
+              "label": null,
+              "isExecuted": false,
+              "name": "Start-> Get Table Data",
+              "sourceStep": "/api/3/workflow_steps/aaa74c65-f786-4da0-bae5-3369a95eb8db",
+              "targetStep": "/api/3/workflow_steps/a79ef4e6-8bb6-4211-9b24-d77a2e1312ca"
+            }
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "uuid": "3a29befc-d755-4d68-8b8c-a451a017dfc7",
+          "collection": "/api/3/workflow_collections/a3da64a2-7d22-4dab-8f72-6c86913f2bbf",
+          "steps": [
+            {
+              "uuid": "c6aef3f8-6b72-473d-affc-7c381748fc1b",
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "step_variables": {
+                  "input": {
+                    "params": []
+                  }
+                }
+              },
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62"
+            },
+            {
+              "uuid": "bc3c5ae4-38ee-4722-85a5-642c9ec4afe2",
+              "@type": "WorkflowStep",
+              "name": "Ingest Inline Data",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "name": "Azure Data Explorer",
+                "config": "",
+                "params": {
+                  "table": "",
+                  "csv_data": "",
+                  "database": ""
+                },
+                "version": "1.0.0",
+                "connector": "azure-data-explorer",
+                "operation": "ingest_inline_data",
+                "operationTitle": "Ingest Inline Data"
+              },
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671"
+            }
+          ],
+          "triggerLimit": null,
+          "description": "Writes (ingests) records into a specified table in the database using the .ingest inline control command. Specify the data to ingest in the CSV format. You can use this operation to update data or metrics back to the database.",
+          "name": "Ingest Inline Data",
+          "tag": "#Azure Data Explorer",
+          "recordTags": [
+            "Azure",
+            "azure-data-explorer"
+          ],
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/c6aef3f8-6b72-473d-affc-7c381748fc1b",
+          "routes": [
+            {
+              "uuid": "00a56768-2e4f-49f5-8d60-9d68f3f2a7bc",
+              "@type": "WorkflowRoute",
+              "label": null,
+              "isExecuted": false,
+              "name": "Start-> Ingest Inline Data",
+              "sourceStep": "/api/3/workflow_steps/c6aef3f8-6b72-473d-affc-7c381748fc1b",
+              "targetStep": "/api/3/workflow_steps/bc3c5ae4-38ee-4722-85a5-642c9ec4afe2"
+            }
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "uuid": "b8f7e01f-660d-4a65-a215-5b5b4b209f07",
+          "collection": "/api/3/workflow_collections/a3da64a2-7d22-4dab-8f72-6c86913f2bbf",
+          "steps": [
+            {
+              "uuid": "addc1514-ad36-4902-ae03-2f4b63548ce1",
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "step_variables": {
+                  "input": {
+                    "params": []
+                  }
+                }
+              },
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62"
+            },
+            {
+              "uuid": "0069bf27-faa0-491c-8ccf-d73cb75831fc",
+              "@type": "WorkflowStep",
+              "name": "Delete Table Data",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "name": "Azure Data Explorer",
+                "config": "",
+                "params": {
+                  "table": "",
+                  "predicate": "",
+                  "database": ""
+                },
+                "version": "1.0.0",
+                "connector": "azure-data-explorer",
+                "operation": "delete_table_data",
+                "operationTitle": "Delete Table Data"
+              },
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671"
+            }
+          ],
+          "triggerLimit": null,
+          "description": "Deletes records from a specified table in the database that match the specified filter conditions using the .delete table records control command. This is a soft delete: the matching records are immediately hidden from queries and are physically removed when the affected extents are rebuilt during background compaction. Requires Table Admin permission on the database.",
+          "name": "Delete Table Data",
+          "tag": "#Azure Data Explorer",
+          "recordTags": [
+            "Azure",
+            "azure-data-explorer"
+          ],
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/addc1514-ad36-4902-ae03-2f4b63548ce1",
+          "routes": [
+            {
+              "uuid": "32753603-06b9-4fe6-8dc2-d8d884cd2279",
+              "@type": "WorkflowRoute",
+              "label": null,
+              "isExecuted": false,
+              "name": "Start-> Delete Table Data",
+              "sourceStep": "/api/3/workflow_steps/addc1514-ad36-4902-ae03-2f4b63548ce1",
+              "targetStep": "/api/3/workflow_steps/0069bf27-faa0-491c-8ccf-d73cb75831fc"
+            }
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "uuid": "80a208bc-96be-4737-97fd-1c0f7b4f1d7e",
+          "collection": "/api/3/workflow_collections/a3da64a2-7d22-4dab-8f72-6c86913f2bbf",
+          "steps": [
+            {
+              "uuid": "870cd748-f3b3-4690-883e-7a5c00b925bc",
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "step_variables": {
+                  "input": {
+                    "params": []
+                  }
+                }
+              },
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62"
+            },
+            {
+              "uuid": "2a22ccdc-a755-4882-84bc-323c76971935",
+              "@type": "WorkflowStep",
+              "name": "Delete Table",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "name": "Azure Data Explorer",
+                "config": "",
+                "params": {
+                  "table": "",
+                  "database": ""
+                },
+                "version": "1.0.0",
+                "connector": "azure-data-explorer",
+                "operation": "delete_table",
+                "operationTitle": "Delete Table"
+              },
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671"
+            }
+          ],
+          "triggerLimit": null,
+          "description": "Deletes a specified table, along with its data, from the database using the .drop table control command.",
+          "name": "Delete Table",
+          "tag": "#Azure Data Explorer",
+          "recordTags": [
+            "Azure",
+            "azure-data-explorer"
+          ],
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/870cd748-f3b3-4690-883e-7a5c00b925bc",
+          "routes": [
+            {
+              "uuid": "81eb3cbc-e87b-4357-87c2-11cf800ad48c",
+              "@type": "WorkflowRoute",
+              "label": null,
+              "isExecuted": false,
+              "name": "Start-> Delete Table",
+              "sourceStep": "/api/3/workflow_steps/870cd748-f3b3-4690-883e-7a5c00b925bc",
+              "targetStep": "/api/3/workflow_steps/2a22ccdc-a755-4882-84bc-323c76971935"
+            }
+          ]
+        }
+      ],
+      "name": "Sample - Azure Data Explorer - 1.0.0",
+      "description": "Azure Data Explorer is a fully managed, high-performance big data analytics platform that makes it easy to analyze large volumes of data streamed from applications, websites, IoT devices, and more, in real-time. This connector connects to Azure Data Explorer (Kusto) clusters using the Azure Data Explorer REST APIs and Kusto Query Language (KQL). It allows you to list databases and tables, explore table schemas and data, run custom KQL queries and management (control) commands, and write data back to the database by ingesting records inline, as well as delete records or tables from the database. This connector is useful for security investigations and enrichment of data, for example, viewing security logs and updating metrics back to the database.",
+      "visible": true,
+      "recordTags": [
+        "Azure",
+        "azure-data-explorer"
+      ]
+    }
+  ]
+}
